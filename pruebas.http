@@ -1,0 +1,9 @@
+PUT http://localhost:3000/login/updateEmailAndName
+
+Content-Type: application/json
+
+{
+    "password": "$2b$10$2xq2Y5xgXDMXWOz3QzolpOCCC.1n.ZOkPYWvztrpY9RTZYG4XUWBa",
+    "newEmail": "nuevo_correo@example.com",
+    "newName": "Nuevo Nombre"
+}
