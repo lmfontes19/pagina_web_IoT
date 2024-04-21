@@ -60,8 +60,8 @@ async function registerUsers(req, res) {
     let userFlag = false;
 
     try {
-        const { name, email, password } = req.body;
-        if (!name || !email || !password) {
+        const { name, email, password, type } = req.body;
+        if (!name || !email || !password || !type) {
             return res.status(400).json({ message: "Los datos recibidos son inválidos." });
         }
 
@@ -92,6 +92,7 @@ async function registerUsers(req, res) {
             name: name,
             email: email,
             password: passwdEncrypted,
+            type: type
         });
         await user.save().then((doc) => { console.log("Usuario creado!" + doc); }).catch((err) => { console.log("Save error:", err); });
 
@@ -195,18 +196,14 @@ async function updateEmailAndName(req, res) {
     const { password, newEmail, newName } = req.body;
 
     try {
-        // Buscar al usuario por la contraseña actual
         const user = await User.findOne({ password });
 
         if (!user) {
             return res.status(404).json({ message: 'Usuario no encontrado.' });
         }
 
-
-        // Actualizar el correo electrónico y el nombre
         user.email = newEmail;
         user.name = newName;
-
         await user.save();
 
         return res.status(200).json({ message: 'Correo electrónico y nombre actualizados correctamente.' });
@@ -215,8 +212,6 @@ async function updateEmailAndName(req, res) {
         return res.status(500).json({ error: 'Error interno del servidor' });
     }
 }
-
-// Ruta para actualizar correo electrónico y nombre por contraseña
 router.put('/updateEmailAndName', updateEmailAndName);
 
 module.exports = router;

@@ -28,6 +28,13 @@
                     <input id="registerName" type="text" placeholder="Nombre" required>
                     <input id="registerEmail" type="email" placeholder="Correo" required>
                     <input id="registerPassword" type="password" placeholder="Contraseña" required>
+                    <div class="radio-container">
+                        <label for="typeUser">Tipo de usuario:</label>
+                        <input type="radio" id="typeUserAdmin" name="typeUser" value="admin">
+                        <label for="typeUserAdmin">Admin</label>
+                        <input type="radio" id="typeUserNormal" name="typeUser" value="normal" checked>
+                        <label for="typeUserNormal">Normal</label>
+                    </div>
                     <button type="button" onclick="registrarUsuario()">Crear Cuenta</button>
                     <div id="signup-error-message"></div>
                 </form>

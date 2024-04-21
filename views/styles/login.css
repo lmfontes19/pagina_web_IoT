@@ -222,6 +222,15 @@ body {
 }
 
 .btn-close {
-    float:right;
+    float: right;
     opacity: 1;
+}
+
+.radio-container {
+    display: flex;
+    align-items: center;
+}
+
+.radio-container label {
+    margin-right: 10px;
 }

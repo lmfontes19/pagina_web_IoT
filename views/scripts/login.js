@@ -18,8 +18,6 @@ async function iniciarSesion() {
         var email = document.getElementById("loginEmail").value;
         var passwd = document.getElementById("loginPassword").value;
 
-
-        // Realizar la autenticación después de obtener la información del usuario
         const response = await fetch("/login/api/login", {
             method: "POST",
             headers: {
@@ -37,23 +35,30 @@ async function iniciarSesion() {
         if (response.ok) {
             console.log("Usuario autenticado:", data);
             var sessionId = '';
-
             const usuarios = await obtenerUsuarios();
             var usuariosArray = usuarios;
 
             for (var i = 0; i < usuariosArray.length; i++) {
                 var usuario = usuariosArray[i];
-
                 if (usuario.email === email) {
                     sessionId = usuario.password;
+                    type = usuario.type;
                     console.log("Coincidió el email. SessionId:", sessionId);
                     break;
                 } else {
                     console.log('usuario no x')
                 }
             }
+
             sessionStorage.setItem('session', sessionId);
-            window.location.href = "/home";
+            if (type === 'admin') {
+                window.location.href = "/admin_home";
+            } else if (type === 'normal') {
+                window.location.href = "/normal_home";
+            } else {
+                console.error('Unknown user type:', type);
+            }
+
         } else {
             document.getElementById("login-error-message").textContent = data.message;
         }
@@ -63,11 +68,13 @@ async function iniciarSesion() {
     }
 }
 
+
 async function registrarUsuario() {
     try {
         var name = document.getElementById("registerName").value;
         var email = document.getElementById("registerEmail").value;
         var passwd = document.getElementById("registerPassword").value;
+        var typeUser = document.querySelector('input[name="typeUser"]:checked').value;
 
         const response = await fetch("/login/api/users", {
             method: "POST",
@@ -78,21 +85,46 @@ async function registrarUsuario() {
                 name: name,
                 email: email,
                 password: passwd,
-            }),
+                type: typeUser
+            })
         });
 
         const data = await response.json();
 
         if (response.ok) {
             console.log("Usuario registrado:", data);
-            alert('Usuario registrado!');
+            var sessionId = '';
+            const usuarios = await obtenerUsuarios();
+            var usuariosArray = usuarios;
+
+            for (var i = 0; i < usuariosArray.length; i++) {
+                var usuario = usuariosArray[i];
+                if (usuario.email === email) {
+                    sessionId = usuario.password;
+                    type = usuario.type;
+                    console.log("Coincidió el email. SessionId:", sessionId);
+                    break;
+                } else {
+                    console.log('usuario no x')
+                }
+            }
+
+            sessionStorage.setItem('session', sessionId);
+            if (type === 'admin') {
+                window.location.href = "/admin_home";
+            } else if (type === 'normal') {
+                window.location.href = "/normal_home";
+            } else {
+                console.error('Unknown user type:', type);
+            }
+
         } else {
             console.error("Error al registrar usuario:", data.message);
             document.getElementById("singup-error-message").textContent = data.message;
         }
     } catch (error) {
         console.error("Error:", error);
-        document.getElementById("signup-error-message").textContent = "No pudimos registrar tu cuenta";
+        document.getElementById("signup-error-message").textContent = "No pudimos registrar tu correo electronico";
     }
 }
 
@@ -151,7 +183,6 @@ async function obtenerUsuarios() {
         });
 
         if (!response.ok) {
-
             console.error("Error al obtener usuarios:", response.statusText);
             return;
         }
@@ -165,8 +196,6 @@ async function obtenerUsuarios() {
 }
 
 
-
-// Por implementar
 async function getHome() {
     try {
         const response = await fetch("/home", {

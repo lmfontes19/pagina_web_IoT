@@ -1,8 +1,8 @@
 function validateAdmin(req, res, next) {
     const authHeader = req.headers["x-auth"];
-    if (!authHeader || authHeader !== "logged in") {
+    if (!authHeader || authHeader !== "normal" || authHeader !== "admin") {
         console.log("No tiene acceso!");
-        return res.redirect("/login.html");
+        return res.redirect("/login");
     }
     next();
 }
