@@ -61,8 +61,8 @@ body {
 }
 
 .container button.hidden {
-    background-color: transparent;
-    border-color: #fff;
+    background-color:rgb(255, 157, 0);
+   
 }
 
 .container form {
@@ -150,9 +150,9 @@ body {
 }
 
 .toggle {
-    background-color: #fdaf40;
+    background-color: #1fa8fc;
     height: 100%;
-    background: linear-gradient(to right, #d86d0c, #fdaf40);
+    background: linear-gradient(to right, #1fa8fc, #002a84);
     color: #fff;
     position: relative;
     left: -100%;
@@ -233,4 +233,17 @@ body {
 
 .radio-container label {
     margin-right: 10px;
+}
+
+#titulo{
+    font-size:90px;
+}
+
+header {
+    padding: 20px 0; /* Añade más relleno arriba y abajo para aumentar la altura total */
+}
+
+.nav-link {
+    font-size: 20px; /* Incrementa el tamaño del texto para los enlaces */
+    padding: 15px 20px; /* Añade más relleno a los enlaces para hacerlos más grandes */
 }

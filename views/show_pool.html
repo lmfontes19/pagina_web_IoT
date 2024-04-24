@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Alberca</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./views/styles/showpool.css">
+    <!-- Ajusta la ruta según la estructura de tu proyecto -->
+</head>
+
+<body>
+    <header><!-- place navbar here -->
+        <nav class="nav nav-pills flex-column flex-sm-row">
+            <a class="flex-sm-fill text-sm-center nav-link" href="/normal_home">Home</a>
+            <a class="flex-sm-fill text-sm-center nav-link disabled">Cerrar sesión</a>
+        </nav>
+        <hr>
+    </header>
+    <h1>PoolGuardian</h1>
+    <center>
+        <h2>Información de la alberca</h2>
+    </center>
+    <div>
+
+    </div>
+    <table id="poolsTable">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Metros</th>
+                <th>Nivel</th>
+                <th>Temperatura Actual</th>
+                <th>Temperatura Ideal</th>
+                <th>pH Ideal</th>
+                <th>pH Actual</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Los datos de las albercas se llenarán aquí -->
+        </tbody>
+    </table>
+    <div class="container mt-4">
+        <div class="chart-container">
+            <div class="info-block">
+                <img src="./views/img/temperatura.JPG" class="side-image">
+                <h3>Temperatura Actual</h3>
+            </div>
+            <canvas id="temperatureChart"></canvas>
+        </div>
+        
+        <div class="chart-container">
+            <div class="info-block">
+                <img src="./views/img/ph.png" class="side-image">
+                <h3>pH Actual</h3>
+            </div>
+            <canvas id="phChart"></canvas>
+        </div>
+    </div>    
+    <script src="./views/scripts/showpool.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+
+</html>

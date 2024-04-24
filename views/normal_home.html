@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Normal Home</title>
+    <title>PoolGuardian Home</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -14,12 +14,35 @@
 </head>
 
 <body>
-    <header>
-        <!-- place navbar here -->
-        <p>Hello normal user!</p>
+    <header><!-- place navbar here -->
+        <nav class="nav nav-pills flex-column flex-sm-row">
+            <a class="flex-sm-fill text-sm-center nav-link" href="/showpool">Ver alberca</a>
+            <a class="flex-sm-fill text-sm-center nav-link disabled">Cerrar sesión</a>
+        </nav>
+        <hr>
     </header>
+    <img src="/views/img/IoTPoolGuradian.png" class="logo">
     <main>
-        <script src="./views/scripts/normal_home.js"></script>
+        <h2 id="texto">
+            <br>
+            Este dispositivo para albercas es ideal para regsitar la temperatura, nivel y pH del agua sin necesidad de
+            ir a ella a comprobarlo.
+        </h2>
+
+        <div id="opc" class="row align-items-center">
+            <div class="col" id="border">
+                <img src="/views/img/temperatura.JPG" id="img">
+                <h3 id="texto">Temperatura</h3>
+            </div>
+            <div class="col" id="border">
+                <img src="/views/img/ph.png" id="img">
+                <h3 id="texto">Acidez o la alacalinidad del agua</h3>
+            </div>
+            <div class="col" id="border">
+                <img src="/views/img/profundidad.png" id="img">
+                <h3 id="texto">Nivel de profundidad</h3>
+            </div>
+        </div>
     </main>
     <footer>
         <!-- place footer here -->

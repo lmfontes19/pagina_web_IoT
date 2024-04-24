@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Alberca</title>
+    <link rel="stylesheet" href="./views/styles/add_pool.css">
+</head>
+<body>
+    <h1>Agregar Alberca</h1>
+    <form id="add-pool-form">
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        
+        <label for="meters">Metros:</label>
+        <input type="number" id="meters" name="meters" required><br><br>
+        
+        <label for="temperature_ideal">Temperatura Ideal:</label>
+        <input type="number" id="temperature_ideal" name="temperature_ideal" required><br><br>
+        
+        <label for="ph_ideal">pH Ideal:</label>
+        <input type="number" id="ph_ideal" name="ph_ideal" required><br><br>
+        
+        <button type="submit">Agregar Alberca</button>
+    </form>
+    
+    <script src="./views/scripts/addpool.js"></script>
+</body>
+</html>

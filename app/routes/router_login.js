@@ -212,6 +212,6 @@ async function updateEmailAndName(req, res) {
         return res.status(500).json({ error: 'Error interno del servidor' });
     }
 }
-router.put('/updateEmailAndName', updateEmailAndName);
+router.put('/updateEmailAndName', updateEmailAndName); 
 
 module.exports = router;

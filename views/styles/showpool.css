@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+body {
+    /*background-color: #3d4cee; /* Azul oscuro */
+    margin: 0; /* Elimina el margen predeterminado */
+    padding: 0; /* Elimina el relleno predeterminado */
+    /*display: flex;*/
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+h1 {
+    color: #00116f; /* Color del título */
+    margin-bottom: 20px; /* Espacio debajo del título */
+}
+h2 {
+    color: #fcff62; /* Color del título */
+    background-color: #01116d; /* Color del título */
+    margin-bottom: 20px; /* Espacio debajo del título */
+}
+
+table {
+    width: 80%;
+    max-width: 960px; /* Ancho máximo deseado */
+    border-collapse: collapse;
+    margin: 0 auto; /* Centrado horizontal automático */
+}
+
+th, td {
+    text-align: left;
+    padding: 8px 16px;
+    border: 1px solid #ffe082; /* Bordes de celdas amarillo oscuro */
+    color: white; /* Color de texto en las celdas */
+}
+
+th {
+    background-color: #4d81cf; /* Color de fondo para los encabezados de tabla */
+}
+
+td {
+    background-color: #060f50; /* Color de fondo para las celdas */
+}
+
+.info-block {
+    display: flex; /* Alinea horizontalmente el contenido */
+    align-items: center; /* Centra verticalmente el contenido */
+    margin-bottom: 20px; /* Espacio debajo del bloque */
+}
+
+.side-image {
+    width: 100px; /* Establece un ancho fijo para la imagen */
+    height: auto; /* Mantiene la proporción de la imagen */
+    margin-right: 20px; /* Espacio a la derecha de la imagen */
+}
+
+h3 {
+    margin: 0; /* Elimina el margen predeterminado para mantener todo alineado */
+    color: #00116f; /* Color del texto para los títulos */
+}
+
+.container {
+    display: flex; /* Usa flexbox para alinear los elementos */
+    flex-wrap: wrap; /* Permite que los elementos se ajusten según el ancho del contenedor */
+    justify-content: space-around; /* Distribuye espacio alrededor de los elementos */
+    padding: 20px; /* Añade relleno alrededor del contenido */
+    background-color: #f4f4f4; /* Color de fondo del contenedor */
+}
+
+.chart-container {
+    flex: 1 1 50%; /* Permite que cada contenedor de gráfica ocupe la mitad del ancho del contenedor padre */
+    max-width: 50%; /* Asegura que no ocupe más de la mitad del ancho */
+    display: flex; /* Usa flexbox para alinear los elementos internos */
+    flex-direction: column; /* Organiza los elementos internos en columna */
+    align-items: center; /* Centra los elementos internamente */
+}
+
+canvas {
+    width: 95%; /* Reduce el ancho de las gráficas para ajustarse dentro del contenedor */
+    height: 200px; /* Establece una altura fija para las gráficas */
+    margin-bottom: 20px; /* Espacio debajo de la gráfica */
+}
+header {
+    padding: 10px 0; /* Añade más relleno arriba y abajo para aumentar la altura total */
+}
+
+.nav-link {
+    font-size: 20px; /* Incrementa el tamaño del texto para los enlaces */
+     /* Añade más relleno a los enlaces para hacerlos más grandes */
+}
+@media (max-width: 600px) {
+    table {
+        width: 95%; /* Ajusta el ancho en pantallas pequeñas */
+    }
+    th, td {
+        padding: 8px; /* Menor relleno en pantallas pequeñas */
+    }
+}
