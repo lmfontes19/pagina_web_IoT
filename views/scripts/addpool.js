@@ -1,36 +1,33 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('add-pool-form');
+document.getElementById('add-pool-form').addEventListener('submit', async function(event) {
+    event.preventDefault();  // Prevenir la recarga de la página
 
-    form.addEventListener('submit', async (event) => {
-        event.preventDefault();
+    const form = event.target;
+    const poolData = {
+        name: form.name.value,
+        meters: form.meters.value,
+        temperature_ideal: form.temperature_ideal.value,
+        ph_ideal: form.ph_ideal.value
+    };
 
-        const formData = new FormData(form);
-        const requestBody = {};
-        formData.forEach((value, key) => {
-            requestBody[key] = value;
+    try {
+        const response = await fetch('/pool/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(poolData)
         });
 
-        try {
-            const response = await fetch('/pool/add', {  // Actualizado para coincidir con la nueva ruta del servidor
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(requestBody)
-            });
-
-            if (response.ok) {
-                alert('Alberca agregada correctamente');
-                form.reset();
-                window.location.href = '/admin_home'; 
-                
-            } else {
-                const errorMessage = await response.text();
-                alert(`Error al agregar alberca: ${errorMessage}`);
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            alert('Hubo un error al agregar la alberca');
+        if (response.ok) {
+            alert('Alberca agregada correctamente');
+            form.reset();  // Resetear el formulario
+            window.location.href = "/admin_home"
+        } else {
+            const errorData = await response.json();
+            alert('Error al agregar alberca: ' + errorData.message);
         }
-    });
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Hubo un error al agregar la alberca');
+    }
 });

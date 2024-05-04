@@ -4,6 +4,7 @@ function validateAdmin(req, res, next) {
         console.log("No tiene acceso!");
         return res.redirect("/login");
     }
+    console.log("Tiene  acceso", authHeader);
     next();
 }
 

@@ -33,19 +33,18 @@ async function loadPools() {
 
 function deletePool(id) {
     console.log("Deleting pool with ID:", id); // Confirma que el ID se recibe correctamente antes de enviarlo
-    if (confirm("¿Confirmas la eliminación de la alberca?")) {
-        fetch(`/admin_home/delete/${id}`, { method: 'DELETE' })
-        .then(response => {
-            if (response.ok) {
-                loadPools();  // Recarga la lista de albercas
-            } else {
-                console.error("Fallo al eliminar, estado HTTP:", response.status);
-                alert("Fallo al eliminar alberca. Código de estado: " + response.status);
-            }
-        })
-        .catch(error => {
-            console.error('Error al intentar eliminar la alberca:', error);
-            alert('Error al eliminar la alberca. Consulta la consola para más detalles.');
-        });
-    }
-}
+    fetch(`/admin_home/delete/${id}`, { method: 'DELETE'})
+    .then(response => {
+        if (response.ok) {
+            loadPools();  // Recarga la lista de albercas
+        } else {
+            console.error("Fallo al eliminar, estado HTTP:", response.status);
+            alert("Fallo al eliminar alberca. Código de estado: " + response.status);
+        }
+    })
+    .catch(error => {
+        console.error('Error al intentar eliminar la alberca:', error);
+        alert('Error al eliminar la alberca. Consulta la consola para más detalles.');
+    });
+
+};

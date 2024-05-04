@@ -5,7 +5,6 @@ const homeRouterAdmin = require("../routes/router_admin_home");
 const homeRouterNormal = require("../routes/router_normal_home");
 const poolRouter = require("../routes/router_pool");
 const router = express.Router();
-//const permiso = require('./admin_home');
 
 router.use("/login", loginRouter);
 router.use("/admin_home", homeRouterAdmin);

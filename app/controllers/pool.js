@@ -12,3 +12,33 @@ exports.getpool = async(req,res) =>{
         res.status(500).json({ error: 'Error al obtener las albercas' });
     }
 };
+
+exports.addPool = async (req, res) => {
+    try {
+        // Obtener datos de ThingSpeak
+        const apiResponse = await axios.get('https://api.thingspeak.com/channels/2483355/feeds.json?results=1');
+        const data = apiResponse.data.feeds[0]; // Asumiendo que el primer 'feed' contiene los datos más recientes
+
+        const { name, meters, temperature_ideal, ph_ideal } = req.body;
+        const temperature_actual = data.field1; // Asumiendo que field1 es la temperatura actual
+        const ph_actual = data.field2; // Asumiendo que field2 es el pH actual
+        const nivel = data.field3;
+
+        const newPool = new Pool({
+            name,
+            meters,
+            nivel,
+            temperature_ideal,
+            temperature_actual,
+            ph_ideal,
+            ph_actual,
+            status: 1  // Estado predeterminado, si es aplicable
+        });
+
+        await newPool.save();
+        res.status(201).json({ message: 'Alberca agregada correctamente' });
+    } catch (error) {
+        console.error("Error agregando alberca:", error);
+        res.status(500).json({ error: error.message });
+    }
+};

@@ -5,7 +5,6 @@ const bcrypt = require("bcrypt");
 const auth = require("../controllers/auth");
 const db = require("../../server");
 
-
 async function getUsers(req, res) {
     try {
         const usuarios = await User.find();
@@ -21,6 +20,7 @@ router.get("/users", getUsers);
 
 async function loginUser(req, res) {
     let userFlag = false;
+    let userType = '';
 
     try {
         const { email, password } = req.body;
@@ -40,12 +40,13 @@ async function loginUser(req, res) {
                     return;
                 if (usuarioExistente[0].email === email && bcrypt.compareSync(password, usuarioExistente[0].password)) {
                     userFlag = true;
+                    userType = usuarioExistente[0].type; 
                     return;
                 }
             }).catch((err) => { console.log("Find error:", err); });
 
         if (userFlag) {
-            return res.status(200).json({ message: "Iniciando sesion." });
+            return res.status(200).json({ message: "Iniciando sesion. Tipo",type: userType});
         }
 
         return res.status(402).json({ message: "El usuario no existe." });
