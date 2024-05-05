@@ -51,6 +51,7 @@ async function iniciarSesion() {
             }
 
             sessionStorage.setItem('session', sessionId);
+            sessionStorage.setItem('type', type);
             if (type === 'admin') {
                 window.location.href = "/admin_home";
             } else if (type === 'normal') {
@@ -110,6 +111,7 @@ async function registrarUsuario() {
             }
 
             sessionStorage.setItem('session', sessionId);
+            sessionStorage.setItem('type', type);
             if (type === 'admin') {
                 window.location.href = "/admin_home";
             } else if (type === 'normal') {
@@ -149,7 +151,7 @@ async function cambiarContrasena() {
 
         if (response.ok) {
             console.log("Cambio realizado:", data);
-            window.location.href = "/home"
+            window.location.href = "/login"
         } else {
             console.error("Error al cambiar ontraseña:", data.message);
             document.getElementById("lvidarContrasena-error-message").textContent = data.message;

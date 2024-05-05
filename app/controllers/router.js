@@ -20,7 +20,6 @@ router.get("/admin_home", (req, res) => {
     res.sendFile(path.resolve(__dirname + "/../../views/admin_home.html"));
 });
 
-
 router.get("/normal_home", (req, res) => {
     res.sendFile(path.resolve(__dirname + "/../../views/normal_home.html"));
 });

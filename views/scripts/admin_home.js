@@ -1,3 +1,17 @@
+try {
+    if (sessionStorage.getItem('session') == null) {
+        alert('Necesitas haber iniciado sesión para acceder');
+        window.location.href = '/login';
+    } else {
+        if (sessionStorage.getItem('type') !== "admin") {
+            alert('Necesitas ser administrador para acceder');
+            window.location.href = '/normal_home';
+        }
+    }
+} catch (e) {
+    console.log('error random' + e);
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
     loadPools();
 });
