@@ -12,16 +12,20 @@
 </head>
 
 <script src="./views/scripts/showpool.js"></script>
-
+<script src="./views/scripts/logout.js"></script>
 <body>
     <header><!-- place navbar here -->
-        <nav class="nav nav-pills flex-column flex-sm-row">
-            <a class="flex-sm-fill text-sm-center nav-link" href="/normal_home">Home</a>
-            <a class="flex-sm-fill text-sm-center nav-link disabled">Cerrar sesión</a>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <h1>PoolGuardian</h1>
+                <a class="flex-sm-fill text-sm-center custom-home-link" href="/normal_home">Home</a>
+                <div class="d-flex">
+                    <button id="logout-button" class="btn btn-warning btn-lg ms-auto me-2">Cerrar Sesión</button>
+                </div>
+            </div>
         </nav>
-        <hr>
     </header>
-    <h1>PoolGuardian</h1>
+
     <center>
         <h2>Información de la alberca</h2>
     </center>

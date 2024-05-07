@@ -38,3 +38,24 @@ exports.getPool = async (req, res) => {
         res.status(500).json({ error: 'Error al obtener las albercas' });
     }
 };
+
+
+// Obtener detalles de una alberca específica
+exports.getPoolDetails = async (req, res) => {
+    const { id } = req.params;
+    console.log("Fetching details for pool with ID:", id); // Diagnóstico
+
+    try {
+        const pool = await Pool.findById(id);
+        if (pool) {
+            console.log("Pool found:", pool); // Diagnóstico
+            res.status(200).json(pool);
+        } else {
+            console.log("Pool not found with ID:", id); // Diagnóstico
+            res.status(404).json({ message: "Alberca no encontrada" });
+        }
+    } catch (error) {
+        console.error("Error al obtener la alberca:", error);
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
+};

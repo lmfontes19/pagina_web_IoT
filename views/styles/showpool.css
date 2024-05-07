@@ -2,8 +2,8 @@
 
 body {
     /*background-color: #3d4cee; /* Azul oscuro */
-    margin: 0; /* Elimina el margen predeterminado */
-    padding: 0; /* Elimina el relleno predeterminado */
+    margin: 0; 
+    padding: 0;
     /*display: flex;*/
     justify-content: center;
     align-items: center;
@@ -12,88 +12,91 @@ body {
 }
 
 h1 {
-    color: #00116f; /* Color del título */
-    margin-bottom: 20px; /* Espacio debajo del título */
+    color: #00116f; 
+    margin-bottom: 20px; 
 }
 h2 {
-    color: #fcff62; /* Color del título */
-    background-color: #01116d; /* Color del título */
-    margin-bottom: 20px; /* Espacio debajo del título */
+    color: #fcff62; 
+    background-color: #01116d; 
+    margin-bottom: 20px; 
 }
 
 table {
     width: 80%;
-    max-width: 960px; /* Ancho máximo deseado */
+    max-width: 960px; 
     border-collapse: collapse;
-    margin: 0 auto; /* Centrado horizontal automático */
+    margin: 0 auto;
 }
 
 th, td {
     text-align: left;
     padding: 8px 16px;
-    border: 1px solid #ffe082; /* Bordes de celdas amarillo oscuro */
-    color: white; /* Color de texto en las celdas */
+    border: 1px solid #ffe082; 
+    color: white;
 }
 
 th {
-    background-color: #4d81cf; /* Color de fondo para los encabezados de tabla */
+    background-color: #4d81cf; 
 }
 
 td {
-    background-color: #060f50; /* Color de fondo para las celdas */
+    background-color: #060f50; 
 }
 
 .info-block {
-    display: flex; /* Alinea horizontalmente el contenido */
-    align-items: center; /* Centra verticalmente el contenido */
-    margin-bottom: 20px; /* Espacio debajo del bloque */
+    display: flex; 
+    align-items: center; 
+    margin-bottom: 20px; 
 }
 
 .side-image {
-    width: 100px; /* Establece un ancho fijo para la imagen */
-    height: auto; /* Mantiene la proporción de la imagen */
-    margin-right: 20px; /* Espacio a la derecha de la imagen */
+    width: 100px; 
+    height: auto; 
+    margin-right: 20px; 
 }
 
 h3 {
-    margin: 0; /* Elimina el margen predeterminado para mantener todo alineado */
-    color: #00116f; /* Color del texto para los títulos */
+    margin: 0; 
+    color: #00116f;
 }
 
 .container {
-    display: flex; /* Usa flexbox para alinear los elementos */
-    flex-wrap: wrap; /* Permite que los elementos se ajusten según el ancho del contenedor */
-    justify-content: space-around; /* Distribuye espacio alrededor de los elementos */
-    padding: 20px; /* Añade relleno alrededor del contenido */
-    background-color: #f4f4f4; /* Color de fondo del contenedor */
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: space-around; 
+    padding: 20px; 
+    background-color: #f4f4f4; 
 }
 
 .chart-container {
-    flex: 1 1 50%; /* Permite que cada contenedor de gráfica ocupe la mitad del ancho del contenedor padre */
-    max-width: 50%; /* Asegura que no ocupe más de la mitad del ancho */
-    display: flex; /* Usa flexbox para alinear los elementos internos */
-    flex-direction: column; /* Organiza los elementos internos en columna */
-    align-items: center; /* Centra los elementos internamente */
+    flex: 1 1 50%;
+    max-width: 50%; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
 }
 
 canvas {
-    width: 95%; /* Reduce el ancho de las gráficas para ajustarse dentro del contenedor */
-    height: 200px; /* Establece una altura fija para las gráficas */
-    margin-bottom: 20px; /* Espacio debajo de la gráfica */
+    width: 95%; 
+    height: 200px; 
+    margin-bottom: 20px; 
 }
 header {
-    padding: 10px 0; /* Añade más relleno arriba y abajo para aumentar la altura total */
+    padding: 10px 0;
 }
 
 .nav-link {
-    font-size: 20px; /* Incrementa el tamaño del texto para los enlaces */
-     /* Añade más relleno a los enlaces para hacerlos más grandes */
+    font-size: 20px; 
 }
 @media (max-width: 600px) {
     table {
-        width: 95%; /* Ajusta el ancho en pantallas pequeñas */
+        width: 95%; 
     }
     th, td {
-        padding: 8px; /* Menor relleno en pantallas pequeñas */
+        padding: 8px; 
     }
+}
+.custom-home-link {
+ 
+    font-size: 20px;
 }

@@ -1,46 +1,60 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
-* {
-    box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
-}
+    * {
+        box-sizing: border-box;
+        font-family: 'Montserrat', sans-serif;
+    }
 
-body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-#opc{
-    width: 100%;
-    padding-left: 10px;
-}
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    #opc{
+        width: 100%;
+    }
+    #opc .col {
+        padding: 20px; 
+    }
+    #opc img {
+        max-width: 100%;
+    }
+    #opc h3 {
+        margin-top: 10px; 
+        margin-bottom: 0; 
+    }
+    #texto{
+        margin: 20px;
 
+    }
 
-#texto{
-    margin: 20px;
-    /*border: 1px solid black; */
+    .logo{
+        width: 100%;
+        height: 340px;
+    }
+    #imgph{
+        width: 64%;
+        height: 60%;
+        padding: 45px;
+        padding-top: 70px;
+        }
+    #img{
+    width: 50%;
+    height: 60%;
+    padding: 20px;
+    }
 
-}
+    header {
+        padding: 10px 0; 
+    }
 
-.logo{
-    width: 100%;
-    height: 20%;
-}
+    .nav-link {
+        font-size: 20px;
+        padding: 15px 20px; 
+    }
+    .custom-nav-link {
+        font-size: 20px;
+        padding: 15px 20px;
+    }
 
-#img{
-   width: 50%;
-   height: 60%;
-   padding: 20px;
-}
-
-header {
-    padding: 20px 0; /* Añade más relleno arriba y abajo para aumentar la altura total */
-}
-
-.nav-link {
-    font-size: 20px; /* Incrementa el tamaño del texto para los enlaces */
-    padding: 15px 20px; /* Añade más relleno a los enlaces para hacerlos más grandes */
-}
-
-/* Asegúrate de que estas clases no estén en conflicto con otras reglas de Bootstrap si las estás usando */

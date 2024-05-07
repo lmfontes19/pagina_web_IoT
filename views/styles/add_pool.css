@@ -2,8 +2,8 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background-color: #e6f7ff; /* un tono de azul claro */
-    color: #000; /* texto en negro */
+    background-color: #e6f7ff; 
+    color: #000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -36,7 +36,7 @@ input[type="number"] {
 }
 
 button {
-    background-color: #007bff; /* un azul más fuerte para el botón */
+    background-color: #007bff;
     color: white;
     border: none;
     padding: 10px 20px;
