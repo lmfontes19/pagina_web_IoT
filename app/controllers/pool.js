@@ -16,7 +16,7 @@ exports.getpool = async(req,res) =>{
 exports.addPool = async (req, res) => {
     try {
         // Obtener datos de ThingSpeak
-        const apiResponse = await axios.get('https://api.thingspeak.com/channels/2483355/feeds.json?results=1');
+        const apiResponse = await axios.get('https://api.thingspeak.com/channels/2483355/feeds.json?start=2024-05-04&end=2024-05-10&api_key=FDOT41Q3QLNOC1UQ');
         const data = apiResponse.data.feeds[0]; // Asumiendo que el primer 'feed' contiene los datos más recientes
 
         const { name, meters, temperature_ideal, ph_ideal } = req.body;

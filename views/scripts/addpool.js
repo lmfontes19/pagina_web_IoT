@@ -31,6 +31,7 @@ document.getElementById('add-pool-form').addEventListener('submit', async functi
             },
             body: JSON.stringify(poolData)
         });
+        console.log(response);
 
         if (response.ok) {
             alert('Alberca agregada correctamente');

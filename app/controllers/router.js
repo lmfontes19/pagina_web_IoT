@@ -26,7 +26,10 @@ router.get("/normal_home", (req, res) => {
     res.sendFile(path.resolve(__dirname + "/../../views/normal_home.html"));
 });
 
-console.log("Definiendo ruta /pool");
+// router.get("/pool", (req, res) => {
+//     res.sendFile(path.resolve(__dirname + "/../../views/pool.html"));
+// });
+
 
 router.get("/addpool", (req, res) => {
     res.sendFile(path.resolve(__dirname + "/../../views/add_pool.html"));

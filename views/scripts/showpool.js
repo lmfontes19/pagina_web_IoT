@@ -1,95 +1,135 @@
-try {
-    if (sessionStorage.getItem('session') == null) {
-        console.log('no existe');
-        window.location.href = '/login'
-    }
-} catch (e) {
-    console.log('error random' + e);
-}
-
 document.addEventListener('DOMContentLoaded', async () => {
     const ctxTemp = document.getElementById('temperatureChart').getContext('2d');
     const ctxPh = document.getElementById('phChart').getContext('2d');
 
-    // Crear las etiquetas horarias para el eje X
-    const hours = ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00',
-                   '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
+    let temperatureLabels = [];
+    let temperatureData = [];
+    let phLabels = [];
+    let phData = [];
 
-    const temperatureChart = new Chart(ctxTemp, {
-        type: 'line',
-        data: {
-            labels: hours, // Utiliza las etiquetas horarias predefinidas
-            datasets: [{
-                label: 'Temperatura Actual',
-                data: new Array(24).fill(null), // Inicializa con un arreglo de nulos
-                borderColor: 'rgb(255, 104, 57)',
-                backgroundColor: 'rgba(255, 104, 57, 0.8)',
-            }]
-        },
-        options: {
-            scales: {
-                x: {
-                    type: 'category'
-                },
-                y: {
-                    beginAtZero: false
+    const fetchData = async () => {
+        try {
+            const response = await fetch('https://api.thingspeak.com/channels/2483355/feeds.json?start=2024-05-03&end=2024-05-10&apikey=FDOT41Q3QLNOC1UQ');
+            const data = await response.json();
+
+            // Limpiar datos antiguos
+            temperatureLabels = [];
+            temperatureData = [];
+            phLabels = [];
+            phData = [];
+
+            data.feeds.forEach(feed => {
+                const date = new Date(feed.created_at);
+                const label = `${date.getUTCHours()}:${date.getUTCMinutes() < 10 ? '0' : ''}${date.getUTCMinutes()}`;
+
+                // Asumiendo que field1 es temperatura y field2 es pH
+                if (feed.field1 !== null) {
+                    temperatureLabels.push(label);
+                    temperatureData.push(parseFloat(feed.field1));
                 }
-            }
-        }
-    });
-
-    const phChart = new Chart(ctxPh, {
-        type: 'line',
-        data: {
-            labels: hours, // Utiliza las etiquetas horarias predefinidas
-            datasets: [{
-                label: 'pH Actual',
-                data: new Array(24).fill(null), // Inicializa con un arreglo de nulos
-                borderColor: 'rgb(140, 168, 124)',
-                backgroundColor: 'rgba(140, 168, 124, 0.8)',
-            }]
-        },
-        options: {
-            scales: {
-                x: {
-                    type: 'category'
-                },
-                y: {
-                    beginAtZero: false
+                if (feed.field2 !== null) {
+                    phLabels.push(label);
+                    phData.push(parseFloat(feed.field2));
                 }
-            }
-        }
-    });
-
-    try {
-        const response = await fetch('/pool/show'); // Asegúrate de que esta ruta esté configurada en tu servidor
-        if (response.ok) {
-            const pools = await response.json();
-            const tableBody = document.getElementById('poolsTable').getElementsByTagName('tbody')[0];
-            pools.forEach(pool => {
-                let row = tableBody.insertRow();
-                row.insertCell(0).textContent = pool.name;
-                row.insertCell(1).textContent = pool.meters;
-                row.insertCell(2).textContent = pool.nivel || 'No disponible';
-                row.insertCell(3).textContent = pool.temperature_actual || 'No disponible';
-                row.insertCell(4).textContent = pool.temperature_ideal;
-                row.insertCell(5).textContent = pool.ph_ideal;
-                row.insertCell(6).textContent = pool.ph_actual || 'No disponible';
-
-                // Supongamos que estos son índices horarios para la demostración
-                const hourIndex = new Date().getHours(); // Solo para demostración
-                temperatureChart.data.datasets[0].data[hourIndex] = pool.temperature_actual;
-                phChart.data.datasets[0].data[hourIndex] = pool.ph_actual;
             });
-            temperatureChart.update();
-            phChart.update();
-        } else {
-            const errorMessage = await response.text();
-            console.error('Error al cargar las albercas:', errorMessage);
-            alert(`Error al cargar las albercas: ${errorMessage}`);
+
+            createCharts();
+            updateTable(data.feeds[data.feeds.length - 1]); // Actualiza la tabla con el último dato
+        } catch (error) {
+            console.error('Error fetching data:', error);
         }
-    } catch (error) {
-        console.error('Error:', error);
-        alert('Hubo un error al cargar las albercas');
-    }
+    };
+
+    
+    // Función para actualizar los datos en la tabla sin borrar las filas
+    const updateTable = (latestData) => {
+        const tableBody = document.getElementById('poolsTable').getElementsByTagName('tbody')[0];
+        if (tableBody.rows.length > 0) {
+            const row = tableBody.rows[0]; // asumimos que hay una sola fila que actualizar
+            row.cells[2].textContent = latestData.field3 || 'No disponible'; // Nivel
+            row.cells[3].textContent = latestData.field1 || 'No disponible'; // Temperatura
+            row.cells[6].textContent = latestData.field2 || 'No disponible'; // pH
+        }
+    };
+    
+
+    // Cargar datos iniciales para la tabla
+    const loadInitialTableData = async () => {
+        const res = await fetch('https://api.thingspeak.com/channels/2483355/feeds.json?start=2024-05-03&end=2024-05-10&apikey=FDOT41Q3QLNOC1UQ');
+        const data = await res.json();
+        const lastFeed = data.feeds[data.feeds.length - 1];
+
+        const response = await fetch('/pool/show');
+        const pools = await response.json();
+        const tableBody = document.getElementById('poolsTable').getElementsByTagName('tbody')[0];
+        pools.forEach(pool => {
+            let row = tableBody.insertRow();
+            row.insertCell(0).textContent = pool.name;
+            row.insertCell(1).textContent = pool.meters;
+            row.insertCell(2).textContent = lastFeed.field3; // Nivel de agua
+            row.insertCell(3).textContent = lastFeed.field1; // Temperatura actual
+            row.insertCell(4).textContent = pool.temperature_ideal; 
+            row.insertCell(5).textContent = pool.ph_ideal;
+            row.insertCell(6).textContent = lastFeed.field2; // pH actual
+        });
+    };
+
+    const createCharts = () => {
+        const temperatureChart = new Chart(ctxTemp, {
+            type: 'line',
+            data: {
+                labels: temperatureLabels,
+                datasets: [{
+                    label: 'Temperatura Actual',
+                    data: temperatureData,
+                    borderColor: 'rgb(255, 99, 132)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        type: 'category',
+                        title: {
+                            display: true,
+                            text: 'Hora:Minuto'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        const phChart = new Chart(ctxPh, {
+            type: 'line',
+            data: {
+                labels: phLabels,
+                datasets: [{
+                    label: 'pH Actual',
+                    data: phData,
+                    borderColor: 'rgb(54, 162, 235)',
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        type: 'category',
+                        title: {
+                            display: true,
+                            text: 'Hora:Minuto'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    };
+
+    loadInitialTableData();
+    fetchData();
 });

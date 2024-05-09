@@ -19,6 +19,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 async function loadPools() {
     try {
         const response = await fetch('/pool/show');
+        const pools =  await fetch('https://api.thingspeak.com/channels/2483355/feeds.json?start=2024-05-03&end=2024-05-10&apikey=FDOT41Q3QLNOC1UQ');
+        const data = await pools.json();
+        const feeds = data.feeds;
+        const lastData = feeds[feeds.length - 1];
+
         if (response.ok) {
             const pools = await response.json();
             const tableBody = document.getElementById('poolsTable').getElementsByTagName('tbody')[0];
@@ -27,11 +32,11 @@ async function loadPools() {
                 let row = tableBody.insertRow();
                 row.insertCell(0).textContent = pool.name;
                 row.insertCell(1).textContent = pool.meters;
-                row.insertCell(2).textContent = pool.nivel || 'N/A';
-                row.insertCell(3).textContent = pool.temperature_actual || 'N/A';
+                row.insertCell(2).textContent = lastData.field3 || 'No disponible';
+                row.insertCell(3).textContent = lastData.field1 || 'No disponible';
                 row.insertCell(4).textContent = pool.temperature_ideal;
                 row.insertCell(5).textContent = pool.ph_ideal;
-                row.insertCell(6).textContent = pool.ph_actual || 'N/A';
+                row.insertCell(6).textContent = lastData.field2 || 'No disponible';
                 let actionsCell = row.insertCell(7);
                 actionsCell.innerHTML = `<button class="btn btn-primary" onclick="editPool('${pool._id}')">Edit</button>
                                          <button class="btn btn-danger" onclick="deletePool('${pool._id}')">Delete</button>`;
