@@ -1,6 +1,6 @@
 try {
     if (sessionStorage.getItem('session') == null) {
-        console.log('no existe');
+        alert('Necesitas haber iniciado sesión para acceder');
         window.location.href = '/login'
     }
 } catch (e) {

@@ -7,7 +7,7 @@ try {
             alert('Necesitas ser administrador para acceder');
             window.location.href = '/normal_home';
         }
-    }x
+    }
 } catch (e) {
     console.log('error random' + e);
 }
